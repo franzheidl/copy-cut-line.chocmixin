@@ -20,7 +20,7 @@ function run(action) {
       // remove leading whitespace:
       var lineContent = recipe.textInRange(lineRange).replace(/(^\s*)/g, '');
       
-      // don't copy/cut line content is only whitespace:
+      // don't copy/cut if line content is only whitespace:
       if (lineContent.trim() !== '') {
         
         Clipboard.copy(lineContent.trim());
