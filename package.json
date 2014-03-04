@@ -1,0 +1,17 @@
+{
+  "name": "Copy Cut Line",
+  "version": "1.0.0",
+  "description": "Copy/cut the whole line with CMD-C / CMD-X if no selection.",
+  "main": "init.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/franzheidl/copy-cut-line.chocmixin.git"
+  },
+  "keywords": [
+  "copy",
+  "cut",
+  "line"
+  ],
+  "author": "Franz Heidl",
+  "license": "MIT"
+}
