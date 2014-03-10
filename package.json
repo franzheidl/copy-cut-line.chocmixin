@@ -1,6 +1,6 @@
 {
   "name": "Copy Cut Line",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Copy/cut the whole line with CMD-C / CMD-X if no selection.",
   "main": "init.js",
   "repository": {
