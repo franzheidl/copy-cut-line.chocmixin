@@ -6,44 +6,46 @@ Franz Heidl 2014
 MIT License
 */
 
-
-
-function run(action) {
+function copyLine() {
   Recipe.run(function(recipe) {
-    
     var cursorRange = recipe.selection;
-    
     if (cursorRange.length < 1) {
-      
       var lineRange = recipe.contentRangeOfLinesInRange(cursorRange);
-      
-      // remove leading whitespace:
       var lineContent = recipe.textInRange(lineRange).replace(/(^\s*)/g, '');
-      
-      // don't copy/cut if line content is only whitespace:
       if (lineContent.trim() !== '') {
-        
         Clipboard.copy(lineContent.trim());
-        
-        if (action === 'cut') {
-          recipe.replaceTextInRange(lineRange, '');
-          recipe.selection = new Range(lineRange.location, 0);
-        }
-        
       }
-      
     }
-    
+  });
+}
+
+function cutLine() {
+  Recipe.run(function(recipe) {
+    var cursorRange = recipe.selection;
+    // Alert.show(cursorRange.length.toString());
+    if (cursorRange.length < 1) {
+      var lineRange = recipe.contentRangeOfLinesInRange(cursorRange);
+      var lineContent = recipe.textInRange(lineRange).replace(/(^\s*)/g, '');
+      if (lineContent.trim() !== '') {
+        Clipboard.copy(lineContent.trim());
+        recipe.replaceTextInRange(lineRange, '');
+        recipe.selection = new Range(lineRange.location, 0);
+      }
+      return;
+    } else {
+      Clipboard.copy(recipe.textInRange(recipe.selection));
+      recipe.replaceTextInRange(recipe.selection, '');
+    }
   });
 }
 
 
 Hooks.addKeyboardShortcut('cmd-c', function() {
-  run('copy');
+  copyLine();
 });
 
-Hooks.addKeyboardShortcut('cmd-x', function() {
-  run('cut');
+Hooks.setShortcutForMenuItem('Edit/Cut', 'ctrl-cmd-x');
+
+Hooks.addMenuItem('Edit/Cut line or selection', 'cmd-x', function() {
+  cutLine();
 });
-
-
