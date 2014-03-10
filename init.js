@@ -22,7 +22,6 @@ function copyLine() {
 function cutLine() {
   Recipe.run(function(recipe) {
     var cursorRange = recipe.selection;
-    // Alert.show(cursorRange.length.toString());
     if (cursorRange.length < 1) {
       var lineRange = recipe.contentRangeOfLinesInRange(cursorRange);
       var lineContent = recipe.textInRange(lineRange).replace(/(^\s*)/g, '');
